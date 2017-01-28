@@ -1,9 +1,11 @@
 -- Shelsha, LOVE2D library to load Playground TEXB files
 -- Uses LOVE2D function naming case for library
-local Shelsha = {_internal = {_meta = {}}}
-local memreadstream = {}
+local bit = require("bit")
 local ffi = require("ffi")
 local lg = require("love.graphics")
+
+local Shelsha = {_internal = {_meta = {}}, _VERSION = "v1.0.0"}
+local memreadstream = {}
 
 --------------------------------------
 -- LOVE2D version-specific function --
