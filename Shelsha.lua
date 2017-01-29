@@ -373,11 +373,11 @@ function Shelsha._internal.from_stream(stream)
 		out.textureBankImage = love.image.newImageData(out.width, out.height)
 		
 		-- Have to set every pixel, damn it's fucking slow
-		for y = 1, out.height do
-			for x = 1, out.width do
+		for y = 0, out.height - 1 do
+			for x = 0, out.width - 1 do
 				local index = (y * out.width + x) * 4
 				out.textureBankImage:setPixel(
-					x - 1, y - 1,
+					x, y,
 					image_buffer[index],
 					image_buffer[index + 1],
 					image_buffer[index + 2],
