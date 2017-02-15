@@ -372,19 +372,8 @@ function Shelsha._internal.from_stream(stream)
 	if not(is_love_010) then
 		out.textureBankImage = love.image.newImageData(out.width, out.height)
 		
-		-- Have to set every pixel, damn it's fucking slow
-		for y = 0, out.height - 1 do
-			for x = 0, out.width - 1 do
-				local index = (y * out.width + x) * 4
-				out.textureBankImage:setPixel(
-					x, y,
-					image_buffer[index],
-					image_buffer[index + 1],
-					image_buffer[index + 2],
-					image_buffer[index + 3]
-				)
-			end
-		end
+		-- Fix of setting every pixel: use getPointer and FFI
+		ffi.copy(ffi.cast("uint8_t*", out.textureBankImage:getPointer()), image_buffer, rgba_image_size)
 		
 		out.textureBankImage = lg.newImage(out.textureBankImage)
 	else
